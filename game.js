@@ -1,4 +1,5 @@
 var blessed = require('blessed');
+var _ = require('lodash/fp');
 const fs = require('fs');
 const Console = require('console').Console;
 
@@ -16,6 +17,7 @@ class Game {
   }
 
   guess(ch) {
+    ch = ch.toLowerCase();
     this.guesses.add(ch);
     this.blessed.setContent(this._content());
     this.screen.render() // ahh this is horrible
@@ -56,7 +58,11 @@ nopq rstu vwxyz`;
   _concealPhrase() {
     var _this = this;
 
-    var notGuessed = [...alphabet].filter(x => !this.guesses.has(x)).join('');
+    var notGuessed = _.chain([...alphabet])
+      .filter(x => !this.guesses.has(x))
+      .flatMap(x => [x, x.toUpperCase()])
+      .value()
+      .join('');
     var re = new RegExp("[" + notGuessed + "]", "g");
     return this.phrase.replace(re, "_");
   }

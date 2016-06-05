@@ -9,6 +9,7 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "blessed": "^0.1.81"
+    "blessed": "^0.1.81",
+    "lodash": "^4.13.1"
   }
 }
