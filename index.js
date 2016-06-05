@@ -1,4 +1,5 @@
 var blessed = require('blessed');
+var Game = require('./game.js').Game;
 
 // Create a screen object.
 var screen = blessed.screen({
@@ -7,13 +8,11 @@ var screen = blessed.screen({
 
 screen.title = 'Hangman';
 
-// Quit on Escape, q, or Control-C.
-screen.key(['escape', 'q', 'C-c'], function(ch, key) {
+screen.key(['escape', 'C-c'], function(ch, key) {
   return process.exit(0);
 });
 
-// Create a box perfectly centered horizontally and vertically.
-var box = blessed.box({
+var welcome = blessed.box({
   top: 'center',
   left: 'center',
 	padding: 2,
@@ -43,37 +42,29 @@ Welcome to hangman.
 
 Press Enter to play.
 
-Press q or Ctrl-c to exit at any time.`,
-});
-
-var game = blessed.box({
-	padding: 2,
-  tags: true,
-  border: {
-    type: 'line'
-  },
-  content: `
-
-___ ___.
-
-abcd efgh ijklm
-nopq rstu vwxyz`,
-
+Press ESC or Ctrl-c to exit at any time.`,
 });
 
 // If box is focused, handle `enter`/`return` and give us some more content.
-box.key('enter', function(ch, key) {
-	box.detach();
-  screen.append(game);
-  game.focus();
+welcome.key('enter', function(ch, key) {
+	welcome.detach();
+  var game = new Game(screen);
+  screen.append(game.blessed);
+  game.blessed.focus();
   screen.render();
 });
 
+// I think what I want is a game factory
+// 1. It randomly chooses a phrase.
+// 2. blessed property
+// 3. choose method
+// 4. getState method -> playing, won, lost
+
 // Append our box to the screen.
-screen.append(box);
+screen.append(welcome);
 
 // Focus our element.
-box.focus();
+welcome.focus();
 
 // Render the screen.
 screen.render();
