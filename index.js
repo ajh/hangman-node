@@ -46,6 +46,29 @@ Press Enter to play.
 Press q or Ctrl-c to exit at any time.`,
 });
 
+var game = blessed.box({
+	padding: 2,
+  tags: true,
+  border: {
+    type: 'line'
+  },
+  content: `
+
+___ ___.
+
+abcd efgh ijklm
+nopq rstu vwxyz`,
+
+});
+
+// If box is focused, handle `enter`/`return` and give us some more content.
+box.key('enter', function(ch, key) {
+	box.detach();
+  screen.append(game);
+  game.focus();
+  screen.render();
+});
+
 // Append our box to the screen.
 screen.append(box);
 
