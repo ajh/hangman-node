@@ -6,10 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Andy Hartford",
   "license": "GPL-3.0",
   "dependencies": {
     "blessed": "^0.1.81",
     "lodash": "^4.13.1"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "git@github.com:ajh/hangman-node.git"
   }
 }
