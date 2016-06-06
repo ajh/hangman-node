@@ -10,10 +10,12 @@
   "license": "GPL-3.0",
   "dependencies": {
     "blessed": "^0.1.81",
-    "lodash": "^4.13.1"
+    "expect.js": "^0.3.1",
+    "lodash": "^4.13.1",
+    "mocha": "^2.5.3"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "git@github.com:ajh/hangman-node.git"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ajh/hangman-node.git"
   }
 }
